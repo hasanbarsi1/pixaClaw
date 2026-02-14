@@ -2,7 +2,7 @@
 /**
  * Team Visualizer — Real-time TUI for watching team collaboration chains.
  *
- * Watches ~/.tinyclaw/events/ for structured JSON events emitted by the
+ * Watches ~/.PIXACLAW/events/ for structured JSON events emitted by the
  * queue processor and renders a live dashboard with Ink (React for CLI).
  *
  * Usage:  node dist/team-visualizer.js [--team <id>]
@@ -19,12 +19,12 @@ import { execSync } from 'child_process';
 // ─── Paths ──────────────────────────────────────────────────────────────────
 const __filename_ = fileURLToPath(import.meta.url);
 const __dirname_ = path.dirname(__filename_);
-const _localTinyclaw = path.join(__dirname_, '..', '..', '.tinyclaw');
-const TINYCLAW_HOME = fs.existsSync(path.join(_localTinyclaw, 'settings.json'))
-    ? _localTinyclaw
-    : path.join(os.homedir(), '.tinyclaw');
-const EVENTS_DIR = path.join(TINYCLAW_HOME, 'events');
-const SETTINGS_FILE = path.join(TINYCLAW_HOME, 'settings.json');
+const _localPIXACLAW = path.join(__dirname_, '..', '..', '.PIXACLAW');
+const PIXACLAW_HOME = fs.existsSync(path.join(_localPIXACLAW, 'settings.json'))
+    ? _localPIXACLAW
+    : path.join(os.homedir(), '.PIXACLAW');
+const EVENTS_DIR = path.join(PIXACLAW_HOME, 'events');
+const SETTINGS_FILE = path.join(PIXACLAW_HOME, 'settings.json');
 
 // ─── Types ──────────────────────────────────────────────────────────────────
 
@@ -41,7 +41,7 @@ interface AgentConfig {
     working_directory: string;
 }
 
-interface TinyClawEvent {
+interface PIXACLAWEvent {
     type: string;
     timestamp: number;
     [key: string]: unknown;
@@ -130,7 +130,7 @@ function Header({ teamId, teamName, uptime }: { teamId: string | null; teamName:
         <Box flexDirection="column" marginBottom={1}>
             <Box>
                 <Text bold color="magenta">{'  \u2726 '}</Text>
-                <Text bold color="white">TinyClaw Team Visualizer</Text>
+                <Text bold color="white">PIXACLAW Team Visualizer</Text>
                 <Text color="gray">{' \u2502 '}</Text>
                 {teamId ? (
                     <Text>
@@ -318,7 +318,7 @@ function App({ filterTeamId }: { filterTeamId: string | null }) {
     }, []);
 
     // Process a single event
-    const handleEvent = useCallback((event: TinyClawEvent) => {
+    const handleEvent = useCallback((event: PIXACLAWEvent) => {
         switch (event.type) {
             case 'processor_start':
                 setProcessorAlive(true);
@@ -445,7 +445,7 @@ function App({ filterTeamId }: { filterTeamId: string | null }) {
             for (const file of existing) {
                 try {
                     const content = fs.readFileSync(path.join(EVENTS_DIR, file), 'utf8');
-                    const event: TinyClawEvent = JSON.parse(content.trim());
+                    const event: PIXACLAWEvent = JSON.parse(content.trim());
                     if (event.timestamp >= cutoff) {
                         handleEvent(event);
                     }
@@ -465,7 +465,7 @@ function App({ filterTeamId }: { filterTeamId: string | null }) {
                 setTimeout(() => {
                     try {
                         const content = fs.readFileSync(filePath, 'utf8');
-                        const event: TinyClawEvent = JSON.parse(content.trim());
+                        const event: PIXACLAWEvent = JSON.parse(content.trim());
                         handleEvent(event);
                     } catch { /* skip */ }
                     // Clean up old event files (older than 60s)
@@ -479,7 +479,7 @@ function App({ filterTeamId }: { filterTeamId: string | null }) {
 
     // Poll queue depth
     useEffect(() => {
-        const queueIncoming = path.join(TINYCLAW_HOME, 'queue/incoming');
+        const queueIncoming = path.join(PIXACLAW_HOME, 'queue/incoming');
         const interval = setInterval(() => {
             try {
                 const files = fs.existsSync(queueIncoming) ? fs.readdirSync(queueIncoming).filter(f => f.endsWith('.json')) : [];
@@ -520,7 +520,7 @@ function App({ filterTeamId }: { filterTeamId: string | null }) {
             {Object.keys(settings.teams).length === 0 ? (
                 <Box flexDirection="column" marginBottom={1}>
                     <Text color="yellow">No teams configured.</Text>
-                    <Text color="gray">Create a team with: tinyclaw team add</Text>
+                    <Text color="gray">Create a team with: PIXACLAW team add</Text>
                 </Box>
             ) : (
                 <>

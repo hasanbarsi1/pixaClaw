@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 /**
- * Telegram Client for TinyClaw Simple
+ * Telegram Client for PIXACLAW Simple
  * Writes DM messages to queue and reads responses
  * Does NOT call Claude directly - that's handled by queue-processor
  *
@@ -16,16 +16,16 @@ import http from 'http';
 import { ensureSenderPaired } from '../lib/pairing';
 
 const SCRIPT_DIR = path.resolve(__dirname, '..', '..');
-const _localTinyclaw = path.join(SCRIPT_DIR, '.tinyclaw');
-const TINYCLAW_HOME = fs.existsSync(path.join(_localTinyclaw, 'settings.json'))
-    ? _localTinyclaw
-    : path.join(require('os').homedir(), '.tinyclaw');
-const QUEUE_INCOMING = path.join(TINYCLAW_HOME, 'queue/incoming');
-const QUEUE_OUTGOING = path.join(TINYCLAW_HOME, 'queue/outgoing');
-const LOG_FILE = path.join(TINYCLAW_HOME, 'logs/telegram.log');
-const SETTINGS_FILE = path.join(TINYCLAW_HOME, 'settings.json');
-const FILES_DIR = path.join(TINYCLAW_HOME, 'files');
-const PAIRING_FILE = path.join(TINYCLAW_HOME, 'pairing.json');
+const _localPIXACLAW = path.join(SCRIPT_DIR, '.PIXACLAW');
+const PIXACLAW_HOME = fs.existsSync(path.join(_localPIXACLAW, 'settings.json'))
+    ? _localPIXACLAW
+    : path.join(require('os').homedir(), '.PIXACLAW');
+const QUEUE_INCOMING = path.join(PIXACLAW_HOME, 'queue/incoming');
+const QUEUE_OUTGOING = path.join(PIXACLAW_HOME, 'queue/outgoing');
+const LOG_FILE = path.join(PIXACLAW_HOME, 'logs/telegram.log');
+const SETTINGS_FILE = path.join(PIXACLAW_HOME, 'settings.json');
+const FILES_DIR = path.join(PIXACLAW_HOME, 'files');
+const PAIRING_FILE = path.join(PIXACLAW_HOME, 'pairing.json');
 
 // Ensure directories exist
 [QUEUE_INCOMING, QUEUE_OUTGOING, path.dirname(LOG_FILE), FILES_DIR].forEach(dir => {
@@ -111,7 +111,7 @@ function getTeamListText(): string {
         const settings = JSON.parse(settingsData);
         const teams = settings.teams;
         if (!teams || Object.keys(teams).length === 0) {
-            return 'No teams configured.\n\nCreate a team with: tinyclaw team add';
+            return 'No teams configured.\n\nCreate a team with: PIXACLAW team add';
         }
         let text = 'Available Teams:\n';
         for (const [id, team] of Object.entries(teams) as [string, any][]) {
@@ -133,7 +133,7 @@ function getAgentListText(): string {
         const settings = JSON.parse(settingsData);
         const agents = settings.agents;
         if (!agents || Object.keys(agents).length === 0) {
-            return 'No agents configured. Using default single-agent mode.\n\nConfigure agents in .tinyclaw/settings.json or run: tinyclaw agent add';
+            return 'No agents configured. Using default single-agent mode.\n\nConfigure agents in .PIXACLAW/settings.json or run: PIXACLAW agent add';
         }
         let text = 'Available Agents:\n';
         for (const [id, agent] of Object.entries(agents) as [string, any][]) {
@@ -249,8 +249,8 @@ function pairingMessage(code: string): string {
     return [
         'This sender is not paired yet.',
         `Your pairing code: ${code}`,
-        'Ask the TinyClaw owner to approve you with:',
-        `tinyclaw pairing approve ${code}`,
+        'Ask the PIXACLAW owner to approve you with:',
+        `PIXACLAW pairing approve ${code}`,
     ].join('\n');
 }
 
@@ -382,7 +382,7 @@ bot.on('message', async (msg: TelegramBot.Message) => {
             log('INFO', 'Reset command received');
 
             // Create reset flag
-            const resetFlagPath = path.join(SCRIPT_DIR, '.tinyclaw/reset_flag');
+            const resetFlagPath = path.join(SCRIPT_DIR, '.PIXACLAW/reset_flag');
             fs.writeFileSync(resetFlagPath, 'reset');
 
             // Reply immediately

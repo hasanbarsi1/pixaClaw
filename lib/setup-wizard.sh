@@ -1,9 +1,9 @@
 #!/usr/bin/env bash
-# TinyClaw Setup Wizard
+# PIXACLAW Setup Wizard
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 PROJECT_ROOT="$(cd "$SCRIPT_DIR/.." && pwd)"
-SETTINGS_FILE="$HOME/.tinyclaw/settings.json"
+SETTINGS_FILE="$HOME/.PIXACLAW/settings.json"
 
 GREEN='\033[0;32m'
 YELLOW='\033[1;33m'
@@ -13,7 +13,7 @@ NC='\033[0m'
 
 echo ""
 echo -e "${BLUE}━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━${NC}"
-echo -e "${GREEN}  TinyClaw - Setup Wizard${NC}"
+echo -e "${GREEN}  PIXACLAW - Setup Wizard${NC}"
 echo -e "${BLUE}━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━${NC}"
 echo ""
 
@@ -155,8 +155,8 @@ echo ""
 echo "Workspace name (where agent directories will be stored)?"
 echo -e "${YELLOW}(Creates ~/your-workspace-name/)${NC}"
 echo ""
-read -rp "Workspace name [default: tinyclaw-workspace]: " WORKSPACE_INPUT
-WORKSPACE_NAME=${WORKSPACE_INPUT:-tinyclaw-workspace}
+read -rp "Workspace name [default: PIXACLAW-workspace]: " WORKSPACE_INPUT
+WORKSPACE_NAME=${WORKSPACE_INPUT:-PIXACLAW-workspace}
 # Clean workspace name
 WORKSPACE_NAME=$(echo "$WORKSPACE_NAME" | tr ' ' '-' | tr -cd 'a-zA-Z0-9_-')
 WORKSPACE_PATH="$HOME/$WORKSPACE_NAME"
@@ -308,60 +308,60 @@ fi
 mkdir -p "$WORKSPACE_PATH"
 echo -e "${GREEN}✓ Created workspace: $WORKSPACE_PATH${NC}"
 
-# Create ~/.tinyclaw with templates
-TINYCLAW_HOME="$HOME/.tinyclaw"
-mkdir -p "$TINYCLAW_HOME"
-mkdir -p "$TINYCLAW_HOME/logs"
+# Create ~/.PIXACLAW with templates
+PIXACLAW_HOME="$HOME/.PIXACLAW"
+mkdir -p "$PIXACLAW_HOME"
+mkdir -p "$PIXACLAW_HOME/logs"
 if [ -d "$PROJECT_ROOT/.claude" ]; then
-    cp -r "$PROJECT_ROOT/.claude" "$TINYCLAW_HOME/"
+    cp -r "$PROJECT_ROOT/.claude" "$PIXACLAW_HOME/"
 fi
 if [ -f "$PROJECT_ROOT/heartbeat.md" ]; then
-    cp "$PROJECT_ROOT/heartbeat.md" "$TINYCLAW_HOME/"
+    cp "$PROJECT_ROOT/heartbeat.md" "$PIXACLAW_HOME/"
 fi
 if [ -f "$PROJECT_ROOT/AGENTS.md" ]; then
-    cp "$PROJECT_ROOT/AGENTS.md" "$TINYCLAW_HOME/"
+    cp "$PROJECT_ROOT/AGENTS.md" "$PIXACLAW_HOME/"
 fi
-echo -e "${GREEN}✓ Created ~/.tinyclaw with templates${NC}"
+echo -e "${GREEN}✓ Created ~/.PIXACLAW with templates${NC}"
 
 # Create default agent directory with config files
 mkdir -p "$DEFAULT_AGENT_DIR"
-if [ -d "$TINYCLAW_HOME/.claude" ]; then
-    cp -r "$TINYCLAW_HOME/.claude" "$DEFAULT_AGENT_DIR/"
+if [ -d "$PIXACLAW_HOME/.claude" ]; then
+    cp -r "$PIXACLAW_HOME/.claude" "$DEFAULT_AGENT_DIR/"
 fi
-if [ -f "$TINYCLAW_HOME/heartbeat.md" ]; then
-    cp "$TINYCLAW_HOME/heartbeat.md" "$DEFAULT_AGENT_DIR/"
+if [ -f "$PIXACLAW_HOME/heartbeat.md" ]; then
+    cp "$PIXACLAW_HOME/heartbeat.md" "$DEFAULT_AGENT_DIR/"
 fi
-if [ -f "$TINYCLAW_HOME/AGENTS.md" ]; then
-    cp "$TINYCLAW_HOME/AGENTS.md" "$DEFAULT_AGENT_DIR/"
+if [ -f "$PIXACLAW_HOME/AGENTS.md" ]; then
+    cp "$PIXACLAW_HOME/AGENTS.md" "$DEFAULT_AGENT_DIR/"
 fi
 echo -e "${GREEN}✓ Created default agent directory: $DEFAULT_AGENT_DIR${NC}"
 
-# Create ~/.tinyclaw/files directory for file exchange
-mkdir -p "$TINYCLAW_HOME/files"
-echo -e "${GREEN}✓ Created files directory: $TINYCLAW_HOME/files${NC}"
+# Create ~/.PIXACLAW/files directory for file exchange
+mkdir -p "$PIXACLAW_HOME/files"
+echo -e "${GREEN}✓ Created files directory: $PIXACLAW_HOME/files${NC}"
 
 # Create directories for additional agents
 for agent_id in "${ADDITIONAL_AGENTS[@]}"; do
     AGENT_DIR="$WORKSPACE_PATH/$agent_id"
     mkdir -p "$AGENT_DIR"
-    if [ -d "$TINYCLAW_HOME/.claude" ]; then
-        cp -r "$TINYCLAW_HOME/.claude" "$AGENT_DIR/"
+    if [ -d "$PIXACLAW_HOME/.claude" ]; then
+        cp -r "$PIXACLAW_HOME/.claude" "$AGENT_DIR/"
     fi
-    if [ -f "$TINYCLAW_HOME/heartbeat.md" ]; then
-        cp "$TINYCLAW_HOME/heartbeat.md" "$AGENT_DIR/"
+    if [ -f "$PIXACLAW_HOME/heartbeat.md" ]; then
+        cp "$PIXACLAW_HOME/heartbeat.md" "$AGENT_DIR/"
     fi
-    if [ -f "$TINYCLAW_HOME/AGENTS.md" ]; then
-        cp "$TINYCLAW_HOME/AGENTS.md" "$AGENT_DIR/"
+    if [ -f "$PIXACLAW_HOME/AGENTS.md" ]; then
+        cp "$PIXACLAW_HOME/AGENTS.md" "$AGENT_DIR/"
     fi
     echo -e "${GREEN}✓ Created agent directory: $AGENT_DIR${NC}"
 done
 
-echo -e "${GREEN}✓ Configuration saved to ~/.tinyclaw/settings.json${NC}"
+echo -e "${GREEN}✓ Configuration saved to ~/.PIXACLAW/settings.json${NC}"
 echo ""
 echo "You can manage agents later with:"
-echo -e "  ${GREEN}tinyclaw agent list${NC}    - List agents"
-echo -e "  ${GREEN}tinyclaw agent add${NC}     - Add more agents"
+echo -e "  ${GREEN}PIXACLAW agent list${NC}    - List agents"
+echo -e "  ${GREEN}PIXACLAW agent add${NC}     - Add more agents"
 echo ""
-echo "You can now start TinyClaw:"
-echo -e "  ${GREEN}tinyclaw start${NC}"
+echo "You can now start PIXACLAW:"
+echo -e "  ${GREEN}PIXACLAW start${NC}"
 echo ""

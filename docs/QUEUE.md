@@ -1,6 +1,6 @@
 # Queue System
 
-TinyClaw uses a file-based queue system to coordinate message processing across multiple channels and agents. This document explains how it works.
+PIXACLAW uses a file-based queue system to coordinate message processing across multiple channels and agents. This document explains how it works.
 
 ## Overview
 
@@ -18,7 +18,7 @@ The queue system acts as a central coordinator between:
                      │ Write message.json
                      ↓
 ┌─────────────────────────────────────────────────────────────┐
-│                   ~/.tinyclaw/queue/                         │
+│                   ~/.PIXACLAW/queue/                         │
 │                                                              │
 │  incoming/          processing/         outgoing/           │
 │  ├─ msg1.json  →   ├─ msg1.json   →   ├─ msg1.json        │
@@ -47,7 +47,7 @@ The queue system acts as a central coordinator between:
 ## Directory Structure
 
 ```
-~/.tinyclaw/
+~/.PIXACLAW/
 ├── queue/
 │   ├── incoming/          # New messages from channels
 │   │   ├── msg_123456.json
@@ -296,10 +296,10 @@ This prevents confusion and teases the upcoming feature!
 
 ### Global Reset
 
-Creates `~/.tinyclaw/reset_flag`:
+Creates `~/.PIXACLAW/reset_flag`:
 
 ```bash
-tinyclaw reset
+PIXACLAW reset
 ```
 
 Next message to **any agent** starts fresh (no `-c` flag).
@@ -309,7 +309,7 @@ Next message to **any agent** starts fresh (no `-c` flag).
 Creates `~/workspace/{agent_id}/reset_flag`:
 
 ```bash
-tinyclaw agent reset coder
+PIXACLAW agent reset coder
 # Or in chat:
 @coder /reset
 ```
@@ -334,11 +334,11 @@ if (globalReset || agentReset) {
 
 ### Uploading Files
 
-Channels download files to `~/.tinyclaw/files/`:
+Channels download files to `~/.PIXACLAW/files/`:
 
 ```
 User uploads: image.png
-→ Saved as: ~/.tinyclaw/files/telegram_123_image.png
+→ Saved as: ~/.PIXACLAW/files/telegram_123_image.png
 → Message includes: [file: /absolute/path/to/image.png]
 ```
 
@@ -420,33 +420,33 @@ Old messages in `processing/` (crashed mid-process):
 
 ```bash
 # See pending messages
-ls ~/.tinyclaw/queue/incoming/
+ls ~/.PIXACLAW/queue/incoming/
 
 # See processing
-ls ~/.tinyclaw/queue/processing/
+ls ~/.PIXACLAW/queue/processing/
 
 # See responses waiting
-ls ~/.tinyclaw/queue/outgoing/
+ls ~/.PIXACLAW/queue/outgoing/
 
 # Watch queue logs
-tail -f ~/.tinyclaw/logs/queue.log
+tail -f ~/.PIXACLAW/logs/queue.log
 ```
 
 ### Common Issues
 
 **Messages stuck in incoming:**
 - Queue processor not running
-- Check: `tinyclaw status`
+- Check: `PIXACLAW status`
 
 **Messages stuck in processing:**
 - AI CLI crashed or hung
-- Manual cleanup: `rm ~/.tinyclaw/queue/processing/*`
-- Restart: `tinyclaw restart`
+- Manual cleanup: `rm ~/.PIXACLAW/queue/processing/*`
+- Restart: `PIXACLAW restart`
 
 **No responses generated:**
 - Check agent routing (wrong @agent_id?)
 - Check AI CLI is installed (claude/codex)
-- Check logs: `tail -f ~/.tinyclaw/logs/queue.log`
+- Check logs: `tail -f ~/.PIXACLAW/logs/queue.log`
 
 **Agents not processing in parallel:**
 - Check TypeScript build: `npm run build`

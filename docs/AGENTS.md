@@ -1,6 +1,6 @@
 # Agents
 
-TinyClaw supports running multiple AI agents simultaneously, each with its own isolated workspace, configuration, and conversation state. This allows you to have specialized agents for different tasks while maintaining complete isolation.
+PIXACLAW supports running multiple AI agents simultaneously, each with its own isolated workspace, configuration, and conversation state. This allows you to have specialized agents for different tasks while maintaining complete isolation.
 
 ## Overview
 
@@ -52,7 +52,7 @@ The agent management feature enables you to:
 │  │ AGENTS.md    │  │ AGENTS.md    │  │ AGENTS.md    │     │
 │  └──────────────┘  └──────────────┘  └──────────────┘     │
 │                                                              │
-│  Shared: ~/.tinyclaw/ (channels, files, logs, queue)       │
+│  Shared: ~/.PIXACLAW/ (channels, files, logs, queue)       │
 └─────────────────────────────────────────────────────────────┘
 ```
 
@@ -76,40 +76,40 @@ const routing = parseAgentRouting(rawMessage, agents);
 
 ### 2. Agent Configuration
 
-Each agent has its own configuration in `.tinyclaw/settings.json`:
+Each agent has its own configuration in `.PIXACLAW/settings.json`:
 
 ```json
 {
   "workspace": {
-    "path": "/Users/me/tinyclaw-workspace",
-    "name": "tinyclaw-workspace"
+    "path": "/Users/me/PIXACLAW-workspace",
+    "name": "PIXACLAW-workspace"
   },
   "agents": {
     "coder": {
       "name": "Code Assistant",
       "provider": "anthropic",
       "model": "sonnet",
-      "working_directory": "/Users/me/tinyclaw-workspace/coder",
+      "working_directory": "/Users/me/PIXACLAW-workspace/coder",
       "system_prompt": "You are a senior software engineer..."
     },
     "writer": {
       "name": "Technical Writer",
       "provider": "openai",
       "model": "gpt-5.3-codex",
-      "working_directory": "/Users/me/tinyclaw-workspace/writer",
+      "working_directory": "/Users/me/PIXACLAW-workspace/writer",
       "prompt_file": "/path/to/writer-prompt.md"
     },
     "assistant": {
       "name": "Assistant",
       "provider": "anthropic",
       "model": "opus",
-      "working_directory": "/Users/me/tinyclaw-workspace/assistant"
+      "working_directory": "/Users/me/PIXACLAW-workspace/assistant"
     }
   }
 }
 ```
 
-**Note:** The `working_directory` is automatically set to `<workspace>/<agent_id>/` when creating agents via `tinyclaw agent add`.
+**Note:** The `working_directory` is automatically set to `<workspace>/<agent_id>/` when creating agents via `PIXACLAW agent add`.
 
 ### 3. Agent Isolation
 
@@ -117,7 +117,7 @@ Each agent has its own isolated workspace directory with complete copies of conf
 
 **Agent Workspaces:**
 ```
-~/tinyclaw-workspace/          # Or custom workspace name
+~/PIXACLAW-workspace/          # Or custom workspace name
 ├── coder/
 │   ├── .claude/               # Agent's own Claude config
 │   │   ├── settings.json
@@ -142,10 +142,10 @@ Each agent has its own isolated workspace directory with complete copies of conf
 
 **Templates & Shared Resources:**
 
-Templates and shared resources are stored in `~/.tinyclaw/`:
+Templates and shared resources are stored in `~/.PIXACLAW/`:
 
 ```
-~/.tinyclaw/
+~/.PIXACLAW/
 ├── .claude/           # Template: Copied to each new agent
 ├── heartbeat.md       # Template: Copied to each new agent
 ├── AGENTS.md          # Template: Copied to each new agent
@@ -162,7 +162,7 @@ Templates and shared resources are stored in `~/.tinyclaw/`:
 - Conversation history is isolated per agent (managed by Claude/Codex CLI)
 - Reset flags allow resetting individual agent conversations
 - File operations happen in the agent's directory
-- Templates stored in `~/.tinyclaw/` are copied when creating new agents
+- Templates stored in `~/.PIXACLAW/` are copied when creating new agents
 - Uploaded files, message queues, and logs are shared (common dependencies)
 
 ### 4. Provider Execution
@@ -171,7 +171,7 @@ The queue processor calls the appropriate CLI based on provider:
 
 **Anthropic (Claude):**
 ```bash
-cd "$agent_working_directory"  # e.g., ~/tinyclaw-workspace/coder/
+cd "$agent_working_directory"  # e.g., ~/PIXACLAW-workspace/coder/
 claude --dangerously-skip-permissions \
   --model claude-sonnet-4-5 \
   --system-prompt "Your custom prompt..." \
@@ -181,7 +181,7 @@ claude --dangerously-skip-permissions \
 
 **OpenAI (Codex):**
 ```bash
-cd "$agent_working_directory"  # e.g., ~/tinyclaw-workspace/coder/
+cd "$agent_working_directory"  # e.g., ~/PIXACLAW-workspace/coder/
 codex exec resume --last \
   --model gpt-5.3-codex \
   --skip-git-repo-check \
@@ -194,11 +194,11 @@ codex exec resume --last \
 
 ### Initial Setup
 
-During first-time setup (`tinyclaw setup`), you'll be prompted for:
+During first-time setup (`PIXACLAW setup`), you'll be prompted for:
 
 1. **Workspace name** - Where to store agent directories
-   - Default: `tinyclaw-workspace`
-   - Creates: `~/tinyclaw-workspace/`
+   - Default: `PIXACLAW-workspace`
+   - Creates: `~/PIXACLAW-workspace/`
 
 2. **Default agent name** - Name for your main assistant
    - Default: `assistant`
@@ -208,7 +208,7 @@ During first-time setup (`tinyclaw setup`), you'll be prompted for:
 
 **Interactive CLI:**
 ```bash
-tinyclaw agent add
+PIXACLAW agent add
 ```
 
 This walks you through:
@@ -222,20 +222,20 @@ This walks you through:
 
 **Manual Configuration:**
 
-Edit `.tinyclaw/settings.json`:
+Edit `.PIXACLAW/settings.json`:
 
 ```json
 {
   "workspace": {
-    "path": "/Users/me/tinyclaw-workspace",
-    "name": "tinyclaw-workspace"
+    "path": "/Users/me/PIXACLAW-workspace",
+    "name": "PIXACLAW-workspace"
   },
   "agents": {
     "researcher": {
       "name": "Research Assistant",
       "provider": "anthropic",
       "model": "opus",
-      "working_directory": "/Users/me/tinyclaw-workspace/researcher",
+      "working_directory": "/Users/me/PIXACLAW-workspace/researcher",
       "system_prompt": "You are a research assistant specialized in academic literature review and data analysis."
     }
   }
@@ -256,7 +256,7 @@ Edit `.tinyclaw/settings.json`:
 **Note:**
 - If both `prompt_file` and `system_prompt` are provided, `prompt_file` takes precedence
 - The `working_directory` is automatically set to `<workspace>/<agent_id>/` when creating agents
-- Each agent gets its own isolated directory with copies of templates from `~/.tinyclaw/`
+- Each agent gets its own isolated directory with copies of templates from `~/.PIXACLAW/`
 
 ## Usage
 
@@ -283,7 +283,7 @@ help me with this (goes to default agent - "assistant" by default)
 
 **From CLI:**
 ```bash
-tinyclaw agent list
+PIXACLAW agent list
 ```
 
 **Output:**
@@ -293,28 +293,28 @@ Configured Agents
 
   @coder - Code Assistant
     Provider:  anthropic/sonnet
-    Directory: /Users/me/tinyclaw-workspace/coder
+    Directory: /Users/me/PIXACLAW-workspace/coder
 
   @writer - Technical Writer
     Provider:  openai/gpt-5.3-codex
-    Directory: /Users/me/tinyclaw-workspace/writer
+    Directory: /Users/me/PIXACLAW-workspace/writer
     Prompt:    /path/to/writer-prompt.md
 
   @assistant - Assistant
     Provider:  anthropic/opus
-    Directory: /Users/me/tinyclaw-workspace/assistant
+    Directory: /Users/me/PIXACLAW-workspace/assistant
 ```
 
 ### Managing Agents
 
 **Show agent details:**
 ```bash
-tinyclaw agent show coder
+PIXACLAW agent show coder
 ```
 
 **Reset agent conversation:**
 ```bash
-tinyclaw agent reset coder
+PIXACLAW agent reset coder
 ```
 
 From chat:
@@ -324,7 +324,7 @@ From chat:
 
 **Remove agent:**
 ```bash
-tinyclaw agent remove coder
+PIXACLAW agent remove coder
 ```
 
 ## Use Cases
@@ -423,7 +423,7 @@ const queueData: QueueData = {
 
 ### Fallback Behavior
 
-If no agents are configured, TinyClaw automatically creates a default agent using the legacy `models` section:
+If no agents are configured, PIXACLAW automatically creates a default agent using the legacy `models` section:
 
 ```json
 {
@@ -442,7 +442,7 @@ This ensures backward compatibility with older configurations.
 
 Two types of reset flags:
 
-1. **Global reset:** `~/.tinyclaw/reset_flag` - resets all agents
+1. **Global reset:** `~/.PIXACLAW/reset_flag` - resets all agents
 2. **Per-agent reset:** `<workspace>/<agent_id>/reset_flag` - resets specific agent
 
 Both are automatically cleaned up after use.
@@ -464,8 +464,8 @@ Or even use cloud-synced directories:
 ```json
 {
   "workspace": {
-    "path": "/Users/me/Dropbox/tinyclaw-workspace",
-    "name": "tinyclaw-workspace"
+    "path": "/Users/me/Dropbox/PIXACLAW-workspace",
+    "name": "PIXACLAW-workspace"
   }
 }
 ```
@@ -476,7 +476,7 @@ Files uploaded through messaging channels are automatically available to all age
 
 ```
 User uploads image.png via Telegram
-→ Saved to ~/.tinyclaw/files/telegram_123456_image.png
+→ Saved to ~/.PIXACLAW/files/telegram_123456_image.png
 → Message includes: [file: /path/to/image.png]
 → Routed to agent
 → Agent can read/process the file
@@ -496,12 +496,12 @@ For detailed troubleshooting of agent-related issues, see [TROUBLESHOOTING.md](T
 
 **Quick reference:**
 
-- **Agent not found** → Check: `tinyclaw agent list`
+- **Agent not found** → Check: `PIXACLAW agent list`
 - **Wrong agent responding** → Verify routing: `@agent_id message` (with space)
-- **Conversation not resetting** → Send message after: `tinyclaw agent reset <id>`
+- **Conversation not resetting** → Send message after: `PIXACLAW agent reset <id>`
 - **CLI not found** → Install Claude Code or Codex CLI
-- **Workspace issues** → Check: `cat .tinyclaw/settings.json | jq '.workspace'`
-- **Templates not copying** → Run: `tinyclaw setup`
+- **Workspace issues** → Check: `cat .PIXACLAW/settings.json | jq '.workspace'`
+- **Templates not copying** → Run: `PIXACLAW setup`
 
 ## Implementation Details
 
@@ -532,7 +532,7 @@ interface ResponseData {
 
 **Templates:**
 ```
-~/.tinyclaw/
+~/.PIXACLAW/
 ├── .claude/           # Copied to new agents
 ├── heartbeat.md       # Copied to new agents
 └── AGENTS.md          # Copied to new agents
@@ -568,7 +568,7 @@ The chain ends naturally when an agent responds without mentioning a teammate.
 
 ### Team Configuration
 
-Teams are stored in `~/.tinyclaw/settings.json`:
+Teams are stored in `~/.PIXACLAW/settings.json`:
 
 ```json
 {
@@ -594,10 +594,10 @@ Team IDs share the `@` routing namespace with agents, so no collisions are allow
 
 **CLI Commands:**
 ```bash
-tinyclaw team list                # List all teams
-tinyclaw team add                 # Add a new team (interactive)
-tinyclaw team show dev            # Show team configuration
-tinyclaw team remove dev          # Remove a team
+PIXACLAW team list                # List all teams
+PIXACLAW team add                 # Add a new team (interactive)
+PIXACLAW team show dev            # Show team configuration
+PIXACLAW team remove dev          # Remove a team
 ```
 
 **In-chat Commands:**
@@ -629,5 +629,5 @@ Potential features for agent management:
 ## See Also
 
 - [README.md](../README.md) - Main project documentation
-- Setup wizard: `tinyclaw setup`
-- Agent CLI: `tinyclaw agent --help`
+- Setup wizard: `PIXACLAW setup`
+- Agent CLI: `PIXACLAW agent --help`

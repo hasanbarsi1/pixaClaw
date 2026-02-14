@@ -3,18 +3,18 @@ import path from 'path';
 import { Settings, AgentConfig, TeamConfig, CLAUDE_MODEL_IDS, CODEX_MODEL_IDS } from './types';
 
 export const SCRIPT_DIR = path.resolve(__dirname, '../..');
-const _localTinyclaw = path.join(SCRIPT_DIR, '.tinyclaw');
-export const TINYCLAW_HOME = fs.existsSync(path.join(_localTinyclaw, 'settings.json'))
-    ? _localTinyclaw
-    : path.join(require('os').homedir(), '.tinyclaw');
-export const QUEUE_INCOMING = path.join(TINYCLAW_HOME, 'queue/incoming');
-export const QUEUE_OUTGOING = path.join(TINYCLAW_HOME, 'queue/outgoing');
-export const QUEUE_PROCESSING = path.join(TINYCLAW_HOME, 'queue/processing');
-export const LOG_FILE = path.join(TINYCLAW_HOME, 'logs/queue.log');
-export const RESET_FLAG = path.join(TINYCLAW_HOME, 'reset_flag');
-export const SETTINGS_FILE = path.join(TINYCLAW_HOME, 'settings.json');
-export const EVENTS_DIR = path.join(TINYCLAW_HOME, 'events');
-export const CHATS_DIR = path.join(TINYCLAW_HOME, 'chats');
+const _localPIXACLAW = path.join(SCRIPT_DIR, '.PIXACLAW');
+export const PIXACLAW_HOME = fs.existsSync(path.join(_localPIXACLAW, 'settings.json'))
+    ? _localPIXACLAW
+    : path.join(require('os').homedir(), '.PIXACLAW');
+export const QUEUE_INCOMING = path.join(PIXACLAW_HOME, 'queue/incoming');
+export const QUEUE_OUTGOING = path.join(PIXACLAW_HOME, 'queue/outgoing');
+export const QUEUE_PROCESSING = path.join(PIXACLAW_HOME, 'queue/processing');
+export const LOG_FILE = path.join(PIXACLAW_HOME, 'logs/queue.log');
+export const RESET_FLAG = path.join(PIXACLAW_HOME, 'reset_flag');
+export const SETTINGS_FILE = path.join(PIXACLAW_HOME, 'settings.json');
+export const EVENTS_DIR = path.join(PIXACLAW_HOME, 'events');
+export const CHATS_DIR = path.join(PIXACLAW_HOME, 'chats');
 
 export function getSettings(): Settings {
     try {
@@ -52,7 +52,7 @@ export function getDefaultAgentFromModels(settings: Settings): AgentConfig {
     }
 
     // Get workspace path from settings or use default
-    const workspacePath = settings?.workspace?.path || path.join(require('os').homedir(), 'tinyclaw-workspace');
+    const workspacePath = settings?.workspace?.path || path.join(require('os').homedir(), 'PIXACLAW-workspace');
     const defaultAgentDir = path.join(workspacePath, 'default');
 
     return {

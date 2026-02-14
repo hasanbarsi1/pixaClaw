@@ -1,7 +1,7 @@
 ```markdown
 <div align="center">
-  <img src="./docs/images/pixaclaw.png" alt="PixaClaw" width="600" />
-  <h1>PixaClaw 🦞</h1>
+  <img src="./docs/images/PIXACLAW.png" alt="PIXACLAW" width="600" />
+  <h1>PIXACLAW 🦞</h1>
   <p><strong>Multi-agent, Multi-team, Multi-channel, 24/7 AI assistant</strong></p>
   <p>Run multiple teams of AI agents that collaborate with each other simultaneously with isolated workspaces.</p>
   <p>
@@ -12,8 +12,8 @@
     <a href="https://discord.gg/your-discord-link">
       <img src="https://img.shields.io/discord/your-discord-id?logo=discord&logoColor=white&label=Discord&color=7289DA" alt="Discord" />
     </a>
-    <a href="https://github.com/hasanbarsi1/pixaClaw/releases/latest">
-      <img src="https://img.shields.io/github/v/release/hasanbarsi1/pixaClaw?label=Latest&color=green" alt="Latest Release" />
+    <a href="https://github.com/hasanbarsi1/PIXACLAW/releases/latest">
+      <img src="https://img.shields.io/github/v/release/hasanbarsi1/PIXACLAW?label=Latest&color=green" alt="Latest Release" />
     </a>
   </p>
 </div>
@@ -23,7 +23,7 @@
 - ✅ **Multi-agent** - Run multiple isolated AI agents with specialized roles
 - ✅ **Multi-team collaboration** - Agents hand off work to teammates via chain execution and fan-out
 - ✅ **Multi-channel** - Discord, WhatsApp, and Telegram
-- ✅ **Team Observation** - You can observe agent teams conversations via `pixaclaw team visualize`
+- ✅ **Team Observation** - You can observe agent teams conversations via `PIXACLAW team visualize`
 - ✅ **Multiple AI providers** - Anthropic Claude and OpenAI Codex using existing subscriptions without breaking ToS
 - ✅ **Parallel processing** - Agents process messages concurrently
 - ✅ **Live TUI dashboard** - Real-time team visualizer for monitoring agent chains
@@ -47,28 +47,28 @@
 **Option 1: One-line Install (Recommended)**
 
 ```bash
-curl -fsSL https://raw.githubusercontent.com/hasanbarsi1/pixaClaw/main/scripts/remote-install.sh | bash
+curl -fsSL https://raw.githubusercontent.com/hasanbarsi1/PIXACLAW/main/scripts/remote-install.sh | bash
 ```
 
 **Option 2: From Release**
 
 ```bash
-wget https://github.com/hasanbarsi1/pixaClaw/releases/latest/download/pixaclaw-bundle.tar.gz
-tar -xzf pixaclaw-bundle.tar.gz
-cd pixaclaw && ./scripts/install.sh
+wget https://github.com/hasanbarsi1/PIXACLAW/releases/latest/download/PIXACLAW-bundle.tar.gz
+tar -xzf PIXACLAW-bundle.tar.gz
+cd PIXACLAW && ./scripts/install.sh
 ```
 
 **Option 3: From Source**
 
 ```bash
-git clone https://github.com/hasanbarsi1/pixaClaw.git
-cd pixaclaw && npm install && ./scripts/install.sh
+git clone https://github.com/hasanbarsi1/PIXACLAW.git
+cd PIXACLAW && npm install && ./scripts/install.sh
 ```
 
 ### First Run
 
 ```bash
-pixaclaw start  # Runs interactive setup wizard
+PIXACLAW start  # Runs interactive setup wizard
 ```
 
 The setup wizard will guide you through:
@@ -101,7 +101,7 @@ The setup wizard will guide you through:
 
 ### WhatsApp Setup
 
-After starting PixaClaw, scan the QR code:
+After starting PIXACLAW, scan the QR code:
 
 ```
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
@@ -116,49 +116,49 @@ After starting PixaClaw, scan the QR code:
 
 ## 📋 Commands
 
-Commands work with `pixaclaw` (if CLI installed) or `./pixaclaw.sh` (direct script).
+Commands work with `PIXACLAW` (if CLI installed) or `./PIXACLAW.sh` (direct script).
 
 ### Core Commands
 
 | Command       | Description                                               | Example               |
 | ------------- | --------------------------------------------------------- | --------------------- |
-| `start`       | Start PixaClaw daemon                                     | `pixaclaw start`      |
-| `stop`        | Stop all processes                                        | `pixaclaw stop`       |
-| `restart`     | Restart PixaClaw                                          | `pixaclaw restart`    |
-| `status`      | Show current status and activity                          | `pixaclaw status`     |
-| `setup`       | Run setup wizard (reconfigure)                            | `pixaclaw setup`      |
-| `logs [type]` | View logs (discord/telegram/whatsapp/queue/heartbeat/all) | `pixaclaw logs queue` |
-| `attach`      | Attach to tmux session                                    | `pixaclaw attach`     |
+| `start`       | Start PIXACLAW daemon                                     | `PIXACLAW start`      |
+| `stop`        | Stop all processes                                        | `PIXACLAW stop`       |
+| `restart`     | Restart PIXACLAW                                          | `PIXACLAW restart`    |
+| `status`      | Show current status and activity                          | `PIXACLAW status`     |
+| `setup`       | Run setup wizard (reconfigure)                            | `PIXACLAW setup`      |
+| `logs [type]` | View logs (discord/telegram/whatsapp/queue/heartbeat/all) | `PIXACLAW logs queue` |
+| `attach`      | Attach to tmux session                                    | `PIXACLAW attach`     |
 
 ### Agent Commands
 
 | Command             | Description                 | Example                       |
 | ------------------- | --------------------------- | ----------------------------- |
-| `agent list`        | List all configured agents  | `pixaclaw agent list`         |
-| `agent add`         | Add new agent (interactive) | `pixaclaw agent add`          |
-| `agent show <id>`   | Show agent configuration    | `pixaclaw agent show coder`   |
-| `agent remove <id>` | Remove an agent             | `pixaclaw agent remove coder` |
-| `agent reset <id>`  | Reset agent conversation    | `pixaclaw agent reset coder`  |
+| `agent list`        | List all configured agents  | `PIXACLAW agent list`         |
+| `agent add`         | Add new agent (interactive) | `PIXACLAW agent add`          |
+| `agent show <id>`   | Show agent configuration    | `PIXACLAW agent show coder`   |
+| `agent remove <id>` | Remove an agent             | `PIXACLAW agent remove coder` |
+| `agent reset <id>`  | Reset agent conversation    | `PIXACLAW agent reset coder`  |
 
 ### Team Commands
 
 | Command               | Description                        | Example                       |
 | --------------------- | ---------------------------------- | ----------------------------- |
-| `team list`           | List all configured teams          | `pixaclaw team list`          |
-| `team add`            | Add new team (interactive)         | `pixaclaw team add`           |
-| `team show <id>`      | Show team configuration            | `pixaclaw team show dev`      |
-| `team remove <id>`    | Remove a team                      | `pixaclaw team remove dev`    |
-| `team visualize [id]` | Live TUI dashboard for team chains | `pixaclaw team visualize dev` |
+| `team list`           | List all configured teams          | `PIXACLAW team list`          |
+| `team add`            | Add new team (interactive)         | `PIXACLAW team add`           |
+| `team show <id>`      | Show team configuration            | `PIXACLAW team show dev`      |
+| `team remove <id>`    | Remove a team                      | `PIXACLAW team remove dev`    |
+| `team visualize [id]` | Live TUI dashboard for team chains | `PIXACLAW team visualize dev` |
 
 ### Configuration Commands
 
 | Command                           | Description                  | Example                                          |
 | --------------------------------- | ---------------------------- | ------------------------------------------------ |
-| `provider [name]`                 | Show or switch AI provider   | `pixaclaw provider anthropic`                    |
-| `provider <name> --model <model>` | Switch provider and model    | `pixaclaw provider openai --model gpt-5.3-codex` |
-| `model [name]`                    | Show or switch AI model      | `pixaclaw model opus`                            |
-| `reset`                           | Reset all conversations      | `pixaclaw reset`                                 |
-| `channels reset <channel>`        | Reset channel authentication | `pixaclaw channels reset whatsapp`               |
+| `provider [name]`                 | Show or switch AI provider   | `PIXACLAW provider anthropic`                    |
+| `provider <name> --model <model>` | Switch provider and model    | `PIXACLAW provider openai --model gpt-5.3-codex` |
+| `model [name]`                    | Show or switch AI model      | `PIXACLAW model opus`                            |
+| `reset`                           | Reset all conversations      | `PIXACLAW reset`                                 |
+| `channels reset <channel>`        | Reset channel authentication | `PIXACLAW channels reset whatsapp`               |
 
 ### Pairing Commands
 
@@ -166,28 +166,28 @@ Use sender pairing to control who can message your agents.
 
 | Command                                | Description                                        | Example                                    |
 | -------------------------------------- | -------------------------------------------------- | ------------------------------------------ |
-| `pairing pending`                      | Show pending sender approvals (with pairing codes) | `pixaclaw pairing pending`                 |
-| `pairing approved`                     | Show approved senders                              | `pixaclaw pairing approved`                |
-| `pairing list`                         | Show both pending and approved senders             | `pixaclaw pairing list`                    |
-| `pairing approve <code>`               | Move a sender from pending to approved by code     | `pixaclaw pairing approve ABCD1234`        |
-| `pairing unpair <channel> <sender_id>` | Remove an approved sender from the allowlist       | `pixaclaw pairing unpair telegram 1234567` |
+| `pairing pending`                      | Show pending sender approvals (with pairing codes) | `PIXACLAW pairing pending`                 |
+| `pairing approved`                     | Show approved senders                              | `PIXACLAW pairing approved`                |
+| `pairing list`                         | Show both pending and approved senders             | `PIXACLAW pairing list`                    |
+| `pairing approve <code>`               | Move a sender from pending to approved by code     | `PIXACLAW pairing approve ABCD1234`        |
+| `pairing unpair <channel> <sender_id>` | Remove an approved sender from the allowlist       | `PIXACLAW pairing unpair telegram 1234567` |
 
 Pairing behavior:
 
-- First message from unknown sender: PixaClaw generates a code and sends approval instructions.
-- Additional messages while still pending: PixaClaw blocks silently (no repeated pairing message).
+- First message from unknown sender: PIXACLAW generates a code and sends approval instructions.
+- Additional messages while still pending: PIXACLAW blocks silently (no repeated pairing message).
 - After approval: messages from that sender are processed normally.
 
 ### Update Commands
 
 | Command  | Description                       | Example           |
 | -------- | --------------------------------- | ----------------- |
-| `update` | Update PixaClaw to latest version | `pixaclaw update` |
+| `update` | Update PIXACLAW to latest version | `PIXACLAW update` |
 
 > **Note:** If you are on v0.0.1 or v0.0.2, the update script was broken. Please re-install instead:
 >
 > ```bash
-> curl -fsSL https://raw.githubusercontent.com/hasanbarsi1/pixaClaw/main/scripts/remote-install.sh | bash
+> curl -fsSL https://raw.githubusercontent.com/hasanbarsi1/PIXACLAW/main/scripts/remote-install.sh | bash
 > ```
 >
 > Your settings and user data will be preserved.
@@ -195,12 +195,12 @@ Pairing behavior:
 <details>
 <summary><b>Update Details</b></summary>
 
-**Auto-detection:** PixaClaw checks for updates on startup (once per hour).
+**Auto-detection:** PIXACLAW checks for updates on startup (once per hour).
 
 **Manual update:**
 
 ```bash
-pixaclaw update
+PIXACLAW update
 ```
 
 This will:
@@ -223,8 +223,8 @@ export PIXACLAW_SKIP_UPDATE_CHECK=1
 
 | Command          | Description                 | Example                          |
 | ---------------- | --------------------------- | -------------------------------- |
-| `send <message>` | Send message to AI manually | `pixaclaw send "Hello!"`         |
-| `send <message>` | Route to specific agent     | `pixaclaw send "@coder fix bug"` |
+| `send <message>` | Send message to AI manually | `PIXACLAW send "Hello!"`         |
+| `send <message>` | Route to specific agent     | `PIXACLAW send "@coder fix bug"` |
 
 ### In-Chat Commands
 
@@ -259,26 +259,26 @@ help me with this  ← goes to default agent (no prefix needed)
 
 ### Agent Configuration
 
-Agents are configured in `.pixaclaw/settings.json`:
+Agents are configured in `.PIXACLAW/settings.json`:
 
 ```json
 {
   "workspace": {
-    "path": "/Users/me/pixaclaw-workspace",
-    "name": "pixaclaw-workspace"
+    "path": "/Users/me/PIXACLAW-workspace",
+    "name": "PIXACLAW-workspace"
   },
   "agents": {
     "coder": {
       "name": "Code Assistant",
       "provider": "anthropic",
       "model": "sonnet",
-      "working_directory": "/Users/me/pixaclaw-workspace/coder"
+      "working_directory": "/Users/me/PIXACLAW-workspace/coder"
     },
     "writer": {
       "name": "Technical Writer",
       "provider": "openai",
       "model": "gpt-5.3-codex",
-      "working_directory": "/Users/me/pixaclaw-workspace/writer"
+      "working_directory": "/Users/me/PIXACLAW-workspace/writer"
     }
   }
 }
@@ -286,7 +286,7 @@ Agents are configured in `.pixaclaw/settings.json`:
 
 Each agent operates in isolation:
 
-- **Separate workspace directory** - `~/pixaclaw-workspace/{agent_id}/`
+- **Separate workspace directory** - `~/PIXACLAW-workspace/{agent_id}/`
 - **Own conversation history** - Maintained by CLI
 - **Custom configuration** - `.claude/`, `heartbeat.md` (root), `AGENTS.md`
 - **Independent resets** - Reset individual agent conversations
@@ -314,7 +314,7 @@ See [docs/AGENTS.md](docs/AGENTS.md) for:
                      │ Write message.json
                      ↓
 ┌─────────────────────────────────────────────────────────────┐
-│                   ~/.pixaclaw/queue/                         │
+│                   ~/.PIXACLAW/queue/                         │
 │                                                              │
 │  incoming/          processing/         outgoing/           │
 │  ├─ msg1.json  →   ├─ msg1.json   →   ├─ msg1.json        │
@@ -362,8 +362,8 @@ See [docs/QUEUE.md](docs/QUEUE.md) for:
 ## 📁 Directory Structure
 
 ```
-pixaclaw/
-├── .pixaclaw/            # PixaClaw data
+PIXACLAW/
+├── .PIXACLAW/            # PIXACLAW data
 │   ├── settings.json     # Configuration
 │   ├── queue/            # Message queue
 │   │   ├── incoming/
@@ -379,7 +379,7 @@ pixaclaw/
 │   ├── .claude/          # Template for agents
 │   ├── heartbeat.md      # Template for agents
 │   └── AGENTS.md         # Template for agents
-├── ~/pixaclaw-workspace/ # Agent workspaces
+├── ~/PIXACLAW-workspace/ # Agent workspaces
 │   ├── coder/
 │   │   ├── .claude/
 │   │   ├── heartbeat.md
@@ -390,14 +390,14 @@ pixaclaw/
 ├── dist/                 # Compiled output
 ├── lib/                  # Runtime scripts
 ├── scripts/              # Installation scripts
-└── pixaclaw.sh           # Main script
+└── PIXACLAW.sh           # Main script
 ```
 
 ## ⚙️ Configuration
 
 ### Settings File
 
-Located at `.pixaclaw/settings.json`:
+Located at `.PIXACLAW/settings.json`:
 
 ```json
 {
@@ -408,15 +408,15 @@ Located at `.pixaclaw/settings.json`:
     "whatsapp": {}
   },
   "workspace": {
-    "path": "/Users/me/pixaclaw-workspace",
-    "name": "pixaclaw-workspace"
+    "path": "/Users/me/PIXACLAW-workspace",
+    "name": "PIXACLAW-workspace"
   },
   "agents": {
     "assistant": {
       "name": "Assistant",
       "provider": "anthropic",
       "model": "sonnet",
-      "working_directory": "/Users/me/pixaclaw-workspace/assistant"
+      "working_directory": "/Users/me/PIXACLAW-workspace/assistant"
     }
   },
   "teams": {
@@ -438,7 +438,7 @@ Edit agent-specific heartbeat prompts:
 
 ```bash
 # Edit heartbeat for specific agent
-nano ~/pixaclaw-workspace/coder/heartbeat.md
+nano ~/PIXACLAW-workspace/coder/heartbeat.md
 ```
 
 Default heartbeat prompt:
@@ -508,29 +508,29 @@ See [docs/TROUBLESHOOTING.md](docs/TROUBLESHOOTING.md) for detailed solutions.
 
 ```bash
 # Reset everything (preserves settings)
-pixaclaw stop && rm -rf .pixaclaw/queue/* && pixaclaw start
+PIXACLAW stop && rm -rf .PIXACLAW/queue/* && PIXACLAW start
 
 # Reset WhatsApp
-pixaclaw channels reset whatsapp
+PIXACLAW channels reset whatsapp
 
 # Check status
-pixaclaw status
+PIXACLAW status
 
 # View logs
-pixaclaw logs all
+PIXACLAW logs all
 ```
 
 **Common issues:**
 
 - Bash version error → Install bash 4.0+: `brew install bash`
-- WhatsApp not connecting → Reset auth: `pixaclaw channels reset whatsapp`
-- Messages stuck → Clear queue: `rm -rf .pixaclaw/queue/processing/*`
-- Agent not found → Check: `pixaclaw agent list`
+- WhatsApp not connecting → Reset auth: `PIXACLAW channels reset whatsapp`
+- Messages stuck → Clear queue: `rm -rf .PIXACLAW/queue/processing/*`
+- Agent not found → Check: `PIXACLAW agent list`
 
 **Need help?**
 
-- [GitHub Issues](https://github.com/hasanbarsi1/pixaClaw/issues)
-- Check logs: `pixaclaw logs all`
+- [GitHub Issues](https://github.com/hasanbarsi1/PIXACLAW/issues)
+- Check logs: `PIXACLAW logs all`
 
 ## 🙏 Credits
 
@@ -545,13 +545,13 @@ MIT
 
 ## 🔗 Attribution
 
-**PixaClaw** is based on [TinyClaw](https://github.com/jlia0/tinyclaw) by [jlia0](https://github.com/jlia0), licensed under the MIT License.
+**PIXACLAW** is based on [PIXACLAW](https://github.com/jlia0/PIXACLAW) by [jlia0](https://github.com/jlia0), licensed under the MIT License.
 
-Original TinyClaw was inspired by [OpenClaw](https://openclaw.ai/) by Peter Steinberger.
+Original PIXACLAW was inspired by [OpenClaw](https://openclaw.ai/) by Peter Steinberger.
 
 ---
 
-**PixaClaw - Tiny but mighty!** 🦞✨
+**PIXACLAW - Tiny but mighty!** 🦞✨
 
-[![Star History Chart](https://api.star-history.com/svg?repos=hasanbarsi1/pixaClaw&type=date&legend=top-left)](https://www.star-history.com/#hasanbarsi1/pixaClaw&type=date&legend=top-left)
+[![Star History Chart](https://api.star-history.com/svg?repos=hasanbarsi1/PIXACLAW&type=date&legend=top-left)](https://www.star-history.com/#hasanbarsi1/PIXACLAW&type=date&legend=top-left)
 ```

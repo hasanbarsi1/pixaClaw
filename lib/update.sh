@@ -1,9 +1,9 @@
 #!/usr/bin/env bash
-# Update management for TinyClaw
+# Update management for PIXACLAW
 
 # GitHub repository info
-GITHUB_REPO="jlia0/tinyclaw"
-UPDATE_CHECK_CACHE="$HOME/.tinyclaw/.update_check"
+GITHUB_REPO="jlia0/PIXACLAW"
+UPDATE_CHECK_CACHE="$HOME/.PIXACLAW/.update_check"
 UPDATE_CHECK_TTL=3600  # Check once per hour
 
 # Get current version
@@ -56,7 +56,7 @@ check_for_updates() {
     local force="${1:-false}"
 
     # Skip if disabled
-    if [ "${TINYCLAW_SKIP_UPDATE_CHECK:-}" = "1" ]; then
+    if [ "${PIXACLAW_SKIP_UPDATE_CHECK:-}" = "1" ]; then
         return 1
     fi
 
@@ -111,7 +111,7 @@ show_update_notification() {
     echo -e "  Current: ${RED}v${current_version}${NC}"
     echo -e "  Latest:  ${GREEN}v${latest_version}${NC}"
     echo ""
-    echo -e "  Update:  ${GREEN}tinyclaw update${NC}"
+    echo -e "  Update:  ${GREEN}PIXACLAW update${NC}"
     echo -e "  Changes: ${BLUE}https://github.com/$GITHUB_REPO/releases/v${latest_version}${NC}"
     echo ""
     echo -e "${BLUE}━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━${NC}"
@@ -120,13 +120,13 @@ show_update_notification() {
 
 # Perform update
 do_update() {
-    echo -e "${BLUE}TinyClaw Update${NC}"
+    echo -e "${BLUE}PIXACLAW Update${NC}"
     echo "==============="
     echo ""
 
     # Check if running
     if session_exists; then
-        echo -e "${YELLOW}Warning: TinyClaw is currently running${NC}"
+        echo -e "${YELLOW}Warning: PIXACLAW is currently running${NC}"
         echo ""
         read -rp "Stop and update? [y/N]: " CONFIRM
         if [[ ! "$CONFIRM" =~ ^[yY] ]]; then
@@ -176,9 +176,9 @@ do_update() {
     echo ""
 
     # Download bundle
-    local bundle_url="https://github.com/$GITHUB_REPO/releases/download/v${latest_version}/tinyclaw-bundle.tar.gz"
+    local bundle_url="https://github.com/$GITHUB_REPO/releases/download/v${latest_version}/PIXACLAW-bundle.tar.gz"
     local temp_dir=$(mktemp -d)
-    local bundle_file="$temp_dir/tinyclaw-bundle.tar.gz"
+    local bundle_file="$temp_dir/PIXACLAW-bundle.tar.gz"
 
     echo -e "${BLUE}[1/4] Downloading...${NC}"
     if ! curl -fSL -o "$bundle_file" "$bundle_url" 2>&1 | grep -v "^  "; then
@@ -191,15 +191,15 @@ do_update() {
 
     # Backup current installation
     echo -e "${BLUE}[2/4] Backing up current installation...${NC}"
-    local backup_dir="$HOME/.tinyclaw/backups/v${current_version}-$(date +%Y%m%d_%H%M%S)"
+    local backup_dir="$HOME/.PIXACLAW/backups/v${current_version}-$(date +%Y%m%d_%H%M%S)"
     mkdir -p "$backup_dir"
 
-    # Backup key files (not .tinyclaw data)
+    # Backup key files (not .PIXACLAW data)
     cp -r "$SCRIPT_DIR/bin" "$backup_dir/" 2>/dev/null || true
     cp -r "$SCRIPT_DIR/src" "$backup_dir/" 2>/dev/null || true
     cp -r "$SCRIPT_DIR/dist" "$backup_dir/" 2>/dev/null || true
     cp -r "$SCRIPT_DIR/lib" "$backup_dir/" 2>/dev/null || true
-    cp "$SCRIPT_DIR/tinyclaw.sh" "$backup_dir/" 2>/dev/null || true
+    cp "$SCRIPT_DIR/PIXACLAW.sh" "$backup_dir/" 2>/dev/null || true
     cp "$SCRIPT_DIR/package.json" "$backup_dir/" 2>/dev/null || true
 
     echo -e "${GREEN}✓ Backed up to: $backup_dir${NC}"
@@ -213,12 +213,12 @@ do_update() {
     # Copy all bundle files into install dir.
     # User data (settings.json, queue/, logs/, etc.) is not in the bundle
     # so it won't be overwritten.
-    cp -a tinyclaw/. "$SCRIPT_DIR/"
+    cp -a PIXACLAW/. "$SCRIPT_DIR/"
 
     # Make scripts executable
     find "$SCRIPT_DIR/bin" "$SCRIPT_DIR/lib" "$SCRIPT_DIR/scripts" \
-        -type f \( -name "*.sh" -o -name "tinyclaw" \) -exec chmod +x {} +
-    chmod +x "$SCRIPT_DIR/tinyclaw.sh"
+        -type f \( -name "*.sh" -o -name "PIXACLAW" \) -exec chmod +x {} +
+    chmod +x "$SCRIPT_DIR/PIXACLAW.sh"
 
     rm -rf "$temp_dir"
 
@@ -236,7 +236,7 @@ do_update() {
     echo ""
     echo "Backup location: $backup_dir"
     echo ""
-    echo "Start TinyClaw:"
-    echo -e "  ${GREEN}tinyclaw start${NC}"
+    echo "Start PIXACLAW:"
+    echo -e "  ${GREEN}PIXACLAW start${NC}"
     echo ""
 }

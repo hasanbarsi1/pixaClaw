@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# TinyClaw - Main daemon using tmux + claude -c -p + messaging channels
+# PIXACLAW - Main daemon using tmux + claude -c -p + messaging channels
 #
 # To add a new channel:
 #   1. Create src/channels/<channel>-client.ts
@@ -7,19 +7,19 @@
 #   3. Fill in the CHANNEL_* registry arrays in lib/common.sh
 #   4. Run setup wizard to enable it
 
-# Use TINYCLAW_HOME if set (for CLI wrapper), otherwise detect from script location
-if [ -n "$TINYCLAW_HOME" ]; then
-    SCRIPT_DIR="$TINYCLAW_HOME"
+# Use PIXACLAW_HOME if set (for CLI wrapper), otherwise detect from script location
+if [ -n "$PIXACLAW_HOME" ]; then
+    SCRIPT_DIR="$PIXACLAW_HOME"
 else
     SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 fi
-TMUX_SESSION="tinyclaw"
-# Centralize all logs to ~/.tinyclaw/logs
-LOG_DIR="$HOME/.tinyclaw/logs"
-if [ -f "$SCRIPT_DIR/.tinyclaw/settings.json" ]; then
-    SETTINGS_FILE="$SCRIPT_DIR/.tinyclaw/settings.json"
+TMUX_SESSION="PIXACLAW"
+# Centralize all logs to ~/.PIXACLAW/logs
+LOG_DIR="$HOME/.PIXACLAW/logs"
+if [ -f "$SCRIPT_DIR/.PIXACLAW/settings.json" ]; then
+    SETTINGS_FILE="$SCRIPT_DIR/.PIXACLAW/settings.json"
 else
-    SETTINGS_FILE="$HOME/.tinyclaw/settings.json"
+    SETTINGS_FILE="$HOME/.PIXACLAW/settings.json"
 fi
 
 mkdir -p "$LOG_DIR"
@@ -64,7 +64,7 @@ case "${1:-}" in
         ;;
     reset)
         echo -e "${YELLOW}Resetting conversation...${NC}"
-        touch "$SCRIPT_DIR/.tinyclaw/reset_flag"
+        touch "$SCRIPT_DIR/.PIXACLAW/reset_flag"
         echo -e "${GREEN}✓ Reset flag set${NC}"
         echo ""
         echo "The next message will start a fresh conversation (without -c)."
@@ -122,7 +122,7 @@ case "${1:-}" in
                         jq ".models.provider = \"anthropic\"" "$SETTINGS_FILE" > "$tmp_file" && mv "$tmp_file" "$SETTINGS_FILE"
                         echo -e "${GREEN}✓ Switched to Anthropic provider${NC}"
                         echo ""
-                        echo "Use 'tinyclaw model {sonnet|opus}' to set the model."
+                        echo "Use 'PIXACLAW model {sonnet|opus}' to set the model."
                     fi
                     ;;
                 openai)
@@ -144,7 +144,7 @@ case "${1:-}" in
                         jq ".models.provider = \"openai\"" "$SETTINGS_FILE" > "$tmp_file" && mv "$tmp_file" "$SETTINGS_FILE"
                         echo -e "${GREEN}✓ Switched to OpenAI/Codex provider${NC}"
                         echo ""
-                        echo "Use 'tinyclaw model {gpt-5.3-codex|gpt-5.2}' to set the model."
+                        echo "Use 'PIXACLAW model {gpt-5.3-codex|gpt-5.2}' to set the model."
                         echo "Note: Make sure you have the 'codex' CLI installed and authenticated."
                     fi
                     ;;
@@ -361,14 +361,14 @@ case "${1:-}" in
         ;;
     *)
         local_names=$(IFS='|'; echo "${ALL_CHANNELS[*]}")
-        echo -e "${BLUE}TinyClaw - Claude Code + Messaging Channels${NC}"
+        echo -e "${BLUE}PIXACLAW - Claude Code + Messaging Channels${NC}"
         echo ""
         echo "Usage: $0 {start|stop|restart|status|setup|send|logs|reset|channels|provider|model|agent|team|pairing|update|attach}"
         echo ""
         echo "Commands:"
-        echo "  start                    Start TinyClaw"
+        echo "  start                    Start PIXACLAW"
         echo "  stop                     Stop all processes"
-        echo "  restart                  Restart TinyClaw"
+        echo "  restart                  Restart PIXACLAW"
         echo "  status                   Show current status"
         echo "  setup                    Run setup wizard (change channels/provider/model/heartbeat)"
         echo "  send <msg>               Send message to AI manually"
@@ -380,7 +380,7 @@ case "${1:-}" in
         echo "  agent {list|add|remove|show|reset}  Manage agents"
         echo "  team {list|add|remove|show|visualize}  Manage teams"
         echo "  pairing {pending|approved|list|approve <code>|unpair <channel> <sender_id>}  Manage sender approvals"
-        echo "  update                   Update TinyClaw to latest version"
+        echo "  update                   Update PIXACLAW to latest version"
         echo "  attach                   Attach to tmux session"
         echo ""
         echo "Examples:"

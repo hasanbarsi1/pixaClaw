@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 /**
- * WhatsApp Client for TinyClaw Simple
+ * WhatsApp Client for PIXACLAW Simple
  * Writes messages to queue and reads responses
  * Does NOT call Claude directly - that's handled by queue-processor
  */
@@ -12,17 +12,17 @@ import path from 'path';
 import { ensureSenderPaired } from '../lib/pairing';
 
 const SCRIPT_DIR = path.resolve(__dirname, '..', '..');
-const _localTinyclaw = path.join(SCRIPT_DIR, '.tinyclaw');
-const TINYCLAW_HOME = fs.existsSync(path.join(_localTinyclaw, 'settings.json'))
-    ? _localTinyclaw
-    : path.join(require('os').homedir(), '.tinyclaw');
-const QUEUE_INCOMING = path.join(TINYCLAW_HOME, 'queue/incoming');
-const QUEUE_OUTGOING = path.join(TINYCLAW_HOME, 'queue/outgoing');
-const LOG_FILE = path.join(TINYCLAW_HOME, 'logs/whatsapp.log');
-const SESSION_DIR = path.join(SCRIPT_DIR, '.tinyclaw/whatsapp-session');
-const SETTINGS_FILE = path.join(TINYCLAW_HOME, 'settings.json');
-const FILES_DIR = path.join(TINYCLAW_HOME, 'files');
-const PAIRING_FILE = path.join(TINYCLAW_HOME, 'pairing.json');
+const _localPIXACLAW = path.join(SCRIPT_DIR, '.PIXACLAW');
+const PIXACLAW_HOME = fs.existsSync(path.join(_localPIXACLAW, 'settings.json'))
+    ? _localPIXACLAW
+    : path.join(require('os').homedir(), '.PIXACLAW');
+const QUEUE_INCOMING = path.join(PIXACLAW_HOME, 'queue/incoming');
+const QUEUE_OUTGOING = path.join(PIXACLAW_HOME, 'queue/outgoing');
+const LOG_FILE = path.join(PIXACLAW_HOME, 'logs/whatsapp.log');
+const SESSION_DIR = path.join(SCRIPT_DIR, '.PIXACLAW/whatsapp-session');
+const SETTINGS_FILE = path.join(PIXACLAW_HOME, 'settings.json');
+const FILES_DIR = path.join(PIXACLAW_HOME, 'files');
+const PAIRING_FILE = path.join(PIXACLAW_HOME, 'pairing.json');
 
 // Ensure directories exist
 [QUEUE_INCOMING, QUEUE_OUTGOING, path.dirname(LOG_FILE), SESSION_DIR, FILES_DIR].forEach(dir => {
@@ -123,7 +123,7 @@ function getTeamListText(): string {
         const settings = JSON.parse(settingsData);
         const teams = settings.teams;
         if (!teams || Object.keys(teams).length === 0) {
-            return 'No teams configured.\n\nCreate a team with: tinyclaw team add';
+            return 'No teams configured.\n\nCreate a team with: PIXACLAW team add';
         }
         let text = '*Available Teams:*\n';
         for (const [id, team] of Object.entries(teams) as [string, any][]) {
@@ -145,7 +145,7 @@ function getAgentListText(): string {
         const settings = JSON.parse(settingsData);
         const agents = settings.agents;
         if (!agents || Object.keys(agents).length === 0) {
-            return 'No agents configured. Using default single-agent mode.\n\nConfigure agents in .tinyclaw/settings.json or run: tinyclaw agent add';
+            return 'No agents configured. Using default single-agent mode.\n\nConfigure agents in .PIXACLAW/settings.json or run: PIXACLAW agent add';
         }
         let text = '*Available Agents:*\n';
         for (const [id, agent] of Object.entries(agents) as [string, any][]) {
@@ -166,8 +166,8 @@ function pairingMessage(code: string): string {
     return [
         'This sender is not paired yet.',
         `Your pairing code: ${code}`,
-        'Ask the TinyClaw owner to approve you with:',
-        `tinyclaw pairing approve ${code}`,
+        'Ask the PIXACLAW owner to approve you with:',
+        `PIXACLAW pairing approve ${code}`,
     ].join('\n');
 }
 
@@ -198,15 +198,15 @@ client.on('qr', (qr: string) => {
     // Display in tmux pane
     qrcode.generate(qr, { small: true });
 
-    // Save to file for tinyclaw.sh to display (avoids tmux capture distortion)
-    const channelsDir = path.join(SCRIPT_DIR, '.tinyclaw/channels');
+    // Save to file for PIXACLAW.sh to display (avoids tmux capture distortion)
+    const channelsDir = path.join(SCRIPT_DIR, '.PIXACLAW/channels');
     if (!fs.existsSync(channelsDir)) {
         fs.mkdirSync(channelsDir, { recursive: true });
     }
     const qrFile = path.join(channelsDir, 'whatsapp_qr.txt');
     qrcode.generate(qr, { small: true }, (code: string) => {
         fs.writeFileSync(qrFile, code);
-        log('INFO', 'QR code saved to .tinyclaw/channels/whatsapp_qr.txt');
+        log('INFO', 'QR code saved to .PIXACLAW/channels/whatsapp_qr.txt');
     });
 
     console.log('\n');
@@ -223,8 +223,8 @@ client.on('ready', () => {
     log('INFO', '✓ WhatsApp client connected and ready!');
     log('INFO', 'Listening for messages...');
 
-    // Create ready flag for tinyclaw.sh
-    const readyFile = path.join(SCRIPT_DIR, '.tinyclaw/channels/whatsapp_ready');
+    // Create ready flag for PIXACLAW.sh
+    const readyFile = path.join(SCRIPT_DIR, '.PIXACLAW/channels/whatsapp_ready');
     fs.writeFileSync(readyFile, Date.now().toString());
 });
 
@@ -311,7 +311,7 @@ client.on('message_create', async (message: Message) => {
             log('INFO', '🔄 Reset command received');
 
             // Create reset flag
-            const resetFlagPath = path.join(SCRIPT_DIR, '.tinyclaw/reset_flag');
+            const resetFlagPath = path.join(SCRIPT_DIR, '.PIXACLAW/reset_flag');
             fs.writeFileSync(resetFlagPath, 'reset');
 
             // Reply immediately
@@ -440,7 +440,7 @@ client.on('disconnected', (reason: string) => {
     log('WARN', `WhatsApp disconnected: ${reason}`);
 
     // Remove ready flag
-    const readyFile = path.join(SCRIPT_DIR, '.tinyclaw/channels/whatsapp_ready');
+    const readyFile = path.join(SCRIPT_DIR, '.PIXACLAW/channels/whatsapp_ready');
     if (fs.existsSync(readyFile)) {
         fs.unlinkSync(readyFile);
     }
@@ -451,7 +451,7 @@ process.on('SIGINT', async () => {
     log('INFO', 'Shutting down WhatsApp client...');
 
     // Remove ready flag
-    const readyFile = path.join(SCRIPT_DIR, '.tinyclaw/channels/whatsapp_ready');
+    const readyFile = path.join(SCRIPT_DIR, '.PIXACLAW/channels/whatsapp_ready');
     if (fs.existsSync(readyFile)) {
         fs.unlinkSync(readyFile);
     }
@@ -464,7 +464,7 @@ process.on('SIGTERM', async () => {
     log('INFO', 'Shutting down WhatsApp client...');
 
     // Remove ready flag
-    const readyFile = path.join(SCRIPT_DIR, '.tinyclaw/channels/whatsapp_ready');
+    const readyFile = path.join(SCRIPT_DIR, '.PIXACLAW/channels/whatsapp_ready');
     if (fs.existsSync(readyFile)) {
         fs.unlinkSync(readyFile);
     }

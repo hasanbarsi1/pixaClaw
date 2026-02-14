@@ -65,7 +65,7 @@ async function processMessage(messageFile: string): Promise<void> {
         const teams = getTeams(settings);
 
         // Get workspace path from settings
-        const workspacePath = settings?.workspace?.path || path.join(require('os').homedir(), 'tinyclaw-workspace');
+        const workspacePath = settings?.workspace?.path || path.join(require('os').homedir(), 'PIXACLAW-workspace');
 
         // Route message to agent (or team)
         let agentId: string;
@@ -289,7 +289,7 @@ async function processMessage(messageFile: string): Promise<void> {
                     .join('\n\n---\n\n');
             }
 
-            // Write chain chat history to .tinyclaw/chats
+            // Write chain chat history to .PIXACLAW/chats
             try {
                 const teamChatsDir = path.join(CHATS_DIR, teamContext.teamId);
                 if (!fs.existsSync(teamChatsDir)) {

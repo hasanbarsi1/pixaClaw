@@ -43,7 +43,7 @@ Even when messaging an agent directly (e.g., `@coder fix this`), team context is
 
 ## Configuration
 
-Teams are stored in `~/.tinyclaw/settings.json`:
+Teams are stored in `~/.PIXACLAW/settings.json`:
 
 ```json
 {
@@ -126,14 +126,14 @@ Fan-out responses are aggregated and the chain ends (no further chaining from fa
 
 ## Chat History
 
-Team chain conversations are saved to `~/.tinyclaw/chats/{team_id}/` as timestamped Markdown files.
+Team chain conversations are saved to `~/.PIXACLAW/chats/{team_id}/` as timestamped Markdown files.
 
 Each file contains:
 - Team name and metadata (date, channel, sender)
 - The original user message
 - Each chain step with agent name and full response
 
-Example file (`~/.tinyclaw/chats/dev/2026-02-13_14-30-00.md`):
+Example file (`~/.PIXACLAW/chats/dev/2026-02-13_14-30-00.md`):
 
 ```markdown
 # Team Chain: Development Team (@dev)
@@ -165,8 +165,8 @@ Changes look good, approved!
 Monitor team chains in real-time with the TUI dashboard:
 
 ```bash
-tinyclaw team visualize         # Watch all teams
-tinyclaw team visualize dev     # Watch specific team
+PIXACLAW team visualize         # Watch all teams
+PIXACLAW team visualize dev     # Watch specific team
 ```
 
 The visualizer displays:
@@ -181,11 +181,11 @@ Press `q` to quit.
 ## CLI Commands
 
 ```bash
-tinyclaw team list              # List all teams
-tinyclaw team add               # Add a new team (interactive wizard)
-tinyclaw team show dev          # Show team configuration
-tinyclaw team remove dev        # Remove a team
-tinyclaw team visualize [id]    # Live TUI dashboard
+PIXACLAW team list              # List all teams
+PIXACLAW team add               # Add a new team (interactive wizard)
+PIXACLAW team show dev          # Show team configuration
+PIXACLAW team remove dev        # Remove a team
+PIXACLAW team visualize [id]    # Live TUI dashboard
 ```
 
 ### In-Chat Commands
@@ -198,7 +198,7 @@ tinyclaw team visualize [id]    # Live TUI dashboard
 
 ## Events
 
-Team chain execution emits events to `~/.tinyclaw/events/` for the visualizer and external tooling:
+Team chain execution emits events to `~/.PIXACLAW/events/` for the visualizer and external tooling:
 
 | Event | Description |
 |-------|-------------|
@@ -212,17 +212,17 @@ Team chain execution emits events to `~/.tinyclaw/events/` for the visualizer an
 
 ```bash
 # 1. Create agents
-tinyclaw agent add    # Create "coder" agent
-tinyclaw agent add    # Create "reviewer" agent
+PIXACLAW agent add    # Create "coder" agent
+PIXACLAW agent add    # Create "reviewer" agent
 
 # 2. Create team
-tinyclaw team add     # Interactive: name "dev", agents [coder, reviewer], leader: coder
+PIXACLAW team add     # Interactive: name "dev", agents [coder, reviewer], leader: coder
 
 # 3. Send a message
-tinyclaw send "@dev fix the auth bug"
+PIXACLAW send "@dev fix the auth bug"
 
 # 4. Watch it work
-tinyclaw team visualize dev
+PIXACLAW team visualize dev
 ```
 
 ## See Also

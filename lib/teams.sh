@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# Team management functions for TinyClaw
+# Team management functions for PIXACLAW
 # Teams are named groups of agents that can collaborate via @teammate mentions
 
 # List all configured teams
@@ -284,8 +284,8 @@ update_agent_team_info() {
     fi
 
     # Remove existing team block if present
-    if grep -q '<!-- TINYCLAW_TEAM_START -->' "$agents_md" 2>/dev/null; then
-        sed -i.bak '/<!-- TINYCLAW_TEAM_START -->/,/<!-- TINYCLAW_TEAM_END -->/d' "$agents_md"
+    if grep -q '<!-- PIXACLAW_TEAM_START -->' "$agents_md" 2>/dev/null; then
+        sed -i.bak '/<!-- PIXACLAW_TEAM_START -->/,/<!-- PIXACLAW_TEAM_END -->/d' "$agents_md"
         rm -f "$agents_md.bak"
     fi
 
@@ -302,7 +302,7 @@ update_agent_team_info() {
 
     # Build team collaboration section
     local team_block=""
-    team_block+="\n<!-- TINYCLAW_TEAM_START -->\n"
+    team_block+="\n<!-- PIXACLAW_TEAM_START -->\n"
     team_block+="## Team Collaboration\n\n"
     team_block+="You are part of the following team(s). You can mention teammates using @teammate_id in your responses to hand off work or ask for help.\n\n"
 
@@ -324,7 +324,7 @@ update_agent_team_info() {
         team_block+="\"I've finished my part. @reviewer please review the changes.\"\n\n"
     done
 
-    team_block+="<!-- TINYCLAW_TEAM_END -->"
+    team_block+="<!-- PIXACLAW_TEAM_END -->"
 
     # Append team block to AGENTS.md
     echo -e "$team_block" >> "$agents_md"

@@ -1,11 +1,11 @@
 #!/usr/bin/env bash
-# Pairing allowlist management for TinyClaw
+# Pairing allowlist management for PIXACLAW
 
 pairing_file_path() {
-    if [ -f "$SCRIPT_DIR/.tinyclaw/settings.json" ]; then
-        echo "$SCRIPT_DIR/.tinyclaw/pairing.json"
+    if [ -f "$SCRIPT_DIR/.PIXACLAW/settings.json" ]; then
+        echo "$SCRIPT_DIR/.PIXACLAW/pairing.json"
     else
-        echo "$HOME/.tinyclaw/pairing.json"
+        echo "$HOME/.PIXACLAW/pairing.json"
     fi
 }
 

@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# Agent management functions for TinyClaw
+# Agent management functions for PIXACLAW
 
 # AGENTS_DIR set after loading settings (uses workspace path)
 AGENTS_DIR=""
@@ -161,10 +161,10 @@ agent_add() {
         "$SETTINGS_FILE" > "$tmp_file" && mv "$tmp_file" "$SETTINGS_FILE"
 
     # Create agent directory and copy configuration files
-    if [ -f "$SCRIPT_DIR/.tinyclaw/settings.json" ]; then
-        TINYCLAW_HOME="$SCRIPT_DIR/.tinyclaw"
+    if [ -f "$SCRIPT_DIR/.PIXACLAW/settings.json" ]; then
+        PIXACLAW_HOME="$SCRIPT_DIR/.PIXACLAW"
     else
-        TINYCLAW_HOME="$HOME/.tinyclaw"
+        PIXACLAW_HOME="$HOME/.PIXACLAW"
     fi
     mkdir -p "$AGENTS_DIR/$AGENT_ID"
 
@@ -200,11 +200,11 @@ agent_add() {
         echo "  → Linked skills to .claude/skills/"
     fi
 
-    # Create .tinyclaw directory and copy SOUL.md
-    mkdir -p "$AGENTS_DIR/$AGENT_ID/.tinyclaw"
+    # Create .PIXACLAW directory and copy SOUL.md
+    mkdir -p "$AGENTS_DIR/$AGENT_ID/.PIXACLAW"
     if [ -f "$SCRIPT_DIR/SOUL.md" ]; then
-        cp "$SCRIPT_DIR/SOUL.md" "$AGENTS_DIR/$AGENT_ID/.tinyclaw/SOUL.md"
-        echo "  → Copied SOUL.md to .tinyclaw/"
+        cp "$SCRIPT_DIR/SOUL.md" "$AGENTS_DIR/$AGENT_ID/.PIXACLAW/SOUL.md"
+        echo "  → Copied SOUL.md to .PIXACLAW/"
     fi
 
     echo ""

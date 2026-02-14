@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
-# Common utilities and configuration for TinyClaw
-# Sourced by main tinyclaw.sh script
+# Common utilities and configuration for PIXACLAW
+# Sourced by main PIXACLAW.sh script
 
 # Check bash version (need 4.0+ for associative arrays)
 if [ "${BASH_VERSINFO[0]}" -lt 4 ]; then
@@ -84,7 +84,7 @@ load_settings() {
     WORKSPACE_PATH=$(jq -r '.workspace.path // empty' "$SETTINGS_FILE" 2>/dev/null)
     if [ -z "$WORKSPACE_PATH" ]; then
         # Fallback for old configs without workspace
-        WORKSPACE_PATH="$HOME/tinyclaw-workspace"
+        WORKSPACE_PATH="$HOME/PIXACLAW-workspace"
     fi
 
     # Read enabled channels array
