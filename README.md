@@ -1,6 +1,6 @@
-```markdown
+
 <div align="center">
-  <img src="./docs/images/PIXACLAW.png" alt="PIXACLAW" width="600" />
+  <img src="./docs/images/tinyclaw.jpeg" alt="PIXACLAW" width="600" />
   <h1>PIXACLAW 🦞</h1>
   <p><strong>Multi-agent, Multi-team, Multi-channel, 24/7 AI assistant</strong></p>
   <p>Run multiple teams of AI agents that collaborate with each other simultaneously with isolated workspaces.</p>
@@ -545,7 +545,7 @@ MIT
 
 ## 🔗 Attribution
 
-**PIXACLAW** is based on [PIXACLAW](https://github.com/jlia0/PIXACLAW) by [jlia0](https://github.com/jlia0), licensed under the MIT License.
+**PIXACLAW** is based on [TinyCLAW](https://github.com/jlia0/tinyclaw) by [jlia0](https://github.com/jlia0), licensed under the MIT License.
 
 Original PIXACLAW was inspired by [OpenClaw](https://openclaw.ai/) by Peter Steinberger.
 
